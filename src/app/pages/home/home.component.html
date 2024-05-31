@@ -1,0 +1,97 @@
+<app-menu></app-menu>
+
+<div class="container-fluid pt-3">
+    <div class="row">
+        <!-- LADO ESQUERDA DA TELA -->
+        <div class="col-12 col-lg-9">
+            <!-- PRIMEIRO CARD -->
+            <div class="card-info">
+                <div class="row">
+                    <div class="col-12 col-md-9">
+                        <h1 class="titulo">CondoHub</h1>
+                        <h3 class="subtitulo">Bem-vindo ao futuro da <span>gestão de condomínios</span>! Nosso aplicativo foi desenvolvido para oferecer uma solução abrangente e intuitiva para síndicos, moradores e equipes administrativas.</h3>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <img src="../../../assets/imagem.jpg" width="100%">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARTE DE BAIXO DA TELA -->
+            <div class="row mt-4">  
+                <!-- CARD-SPINNER-ESQUERDA -->
+                <div class="col-6">
+                    <div class="card-info">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="texto-card">Total de usuários cadastrados no sistema</p>
+                                <p class="numero-card">42</p>
+                                <p class="destaque-card">+ 5 adicionados na última semana</p>
+                            </div>
+                            <div class="col-4">
+                                <mat-progress-spinner class="example-margin mx-auto" mode="determinate"
+                                value="28"></mat-progress-spinner>
+                                <p class="info-spinner">42/150</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD-SPINNER-DIREITA -->
+                <div class="col-6">
+                    <div class="card-info">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="texto-card">Total de avisos cadastrados</p>
+                                <p class="numero-card">5</p>
+                                <p class="destaque-card">+ 3 adicionados na última semana</p>
+                            </div>
+                            <div class="col-4">
+                                <mat-progress-spinner class="example-margin mx-auto color-spinner" mode="determinate"
+                                value="60"></mat-progress-spinner>
+                                <p class="info-spinner">3/5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD USUÁRIO CADASTRADO -->
+                <div class="col-12 mt-4">
+                    <div class="card-info">
+                        <h3 class="titulo">Último aviso cadastrado</h3>
+
+                        <hr class="hr">
+
+                        <div class="row">
+                            <div class="col-1"> <mat-icon>engineering</mat-icon> </div>
+                            <div class="col-1"> <p class="texto-p">1</p> </div>
+                            <div class="col"> <p class="texto-p">Manutenção nos elevadores</p> </div>
+                            <div class="col"> <p class="texto-p">Sexta-feira, 9h30m será executada...</p> </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- LADO DIREITO DA TELA -->
+        <div class="col-12 col-lg-3">
+            <div class="card-info">
+                <div class="container-perfil">
+                    <img src="../../../assets/profile.png" class="img-perfil">
+                    <h4>Seja bem-vindo, Síndico</h4>
+                    <h5>{{ userName }}</h5>
+                    <li> <mat-icon>location_on</mat-icon> PR - Curitiba </li>
+                </div>
+
+                <hr class="hr">
+                <p class="texto-p">"escrever aqui um textinho depois... ver melhor"</p>
+                <hr class="hr">
+
+                <li> <mat-icon>manage_accounts</mat-icon>Gerenciar Moradores </li>
+                <li> <mat-icon>manage_accounts</mat-icon>Gerenciar Porteiros</li>
+                <li> <mat-icon>manage_search</mat-icon>Gerenciar Avisos</li>
+            </div>
+        </div>
+    </div>
+</div>
