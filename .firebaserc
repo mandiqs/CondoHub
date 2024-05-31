@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "projetoangularcondohub": {
+      "hosting": {
+        "angularproject": [
+          "projetoangularcondohub"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "projetoangularcondohub"
+  }
+}

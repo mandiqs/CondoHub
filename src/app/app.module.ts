@@ -18,6 +18,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { CadastroMoradorComponent } from './pages/cadastro-morador/cadastro-morador.component';
 import { CadastroPorteirosComponent } from './pages/cadastro-porteiros/cadastro-porteiros.component';
 import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -39,6 +42,9 @@ import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos
     MatIconModule,
     MatProgressSpinnerModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    provideFirebaseApp(() => initializeApp({"projectId":"projetoangularcondohub","appId":"1:131801251002:web:2df1259be788f9a372d683","storageBucket":"projetoangularcondohub.appspot.com","apiKey":"AIzaSyAHME7wAKt55Vmp__N3IdurmHyHUNdVlm8","authDomain":"projetoangularcondohub.firebaseapp.com","messagingSenderId":"131801251002","measurementId":"G-G5M4021LQJ"})),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]
