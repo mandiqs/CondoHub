@@ -21,6 +21,7 @@ import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     MenuComponent,
     CadastroMoradorComponent,
     CadastroPorteirosComponent,
-    CadastroAvisosComponent
+    CadastroAvisosComponent,
+    GerenciarMoradorComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CadastroMoradorComponent } from './pages/cadastro-morador/cadastro-morador.component';
 import { CadastroPorteirosComponent } from './pages/cadastro-porteiros/cadastro-porteiros.component';
 import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos.component';
+import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
 
 const routes: Routes = [ //definição rota componente login
   { path: '', component: LoginComponent}, 
@@ -13,6 +14,7 @@ const routes: Routes = [ //definição rota componente login
   { path: 'cadastro-morador', component: CadastroMoradorComponent},
   { path: 'cadastro-porteiros', component: CadastroPorteirosComponent},
   { path: 'cadastro-avisos', component: CadastroAvisosComponent},
+  { path: 'gerenciar-morador', component: GerenciarMoradorComponent},
   
 ];
 
