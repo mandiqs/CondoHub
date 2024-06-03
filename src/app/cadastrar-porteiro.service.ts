@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Morador } from '../models/morador'; 
+import { Porteiro } from '../app/models/porteiro'; 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CadastrarMoradorService {
+export class CadastrarPorteiroService {
 
   constructor(private firestore: Firestore) { }
 
-  async saveData(data: Morador) {
+  async saveData(data: Porteiro) {
     try {
-      const collectionInstance = collection(this.firestore, 'morador');
+      const collectionInstance = collection(this.firestore, 'porteiro');
       await addDoc(collectionInstance, data);
       console.log("Salvo com sucesso");
       console.log(data);
