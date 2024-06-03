@@ -4,6 +4,6 @@ export interface Porteiro {
     cpf: string;
     dataNascimento: string;
     endereco: string;
-    telefone: number;
+    telefone: string;
     dataContratacao: string;
   }

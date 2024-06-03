@@ -4,7 +4,7 @@
     <div class="row">
         
         <div class="container cadastro mt-3">
-            <h2 class="mb-4 titulo">Formulário de Cadastro de Avisos</h2>
+            <h2 class="mb-4 titulo">Cadastro de avisos</h2>
 
             <form id="cadastroAvisos" (ngSubmit)="onSubmit()">
 
@@ -13,12 +13,12 @@
                 <div class="container col-sm-8">
                     
                     <div class="form-group">
-                        <label for="tituloAviso">Título do Aviso:</label>
+                        <label for="tituloAviso">Título do aviso:</label>
                         <input type="text" class="form-control" id="tituloAviso" name="tituloAviso" [(ngModel)]="cadastroAvisos.titulo" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="dataEmissao">Data de Emissão:</label>
+                        <label for="dataEmissao">Data de emissão:</label>
                         <input type="date" class="form-control" id="dataEmissao" name="dataEmissao" [(ngModel)]="cadastroAvisos.data" required>
                     </div>
 

@@ -1,4 +1,3 @@
-
 <app-menu></app-menu>
 
 
@@ -8,46 +7,49 @@
         
 
         <div class="container cadastro mt-3">
-            <h2 class="mb-4 titulo">Formulário de Cadastro de Porteiros</h2>
-            <form>
+            <h2 class="mb-4 titulo">Cadastro de porteiros</h2>
+            
+            <form id="cadastroPorteiros" (ngSubmit)="onSubmit()">
+
             <div class="row">
 
                 <div class="container col-sm-4">
                     
                     <div class="form-group">
-                        <label for="nomeMorador">Nome do Porteiro:</label>
-                        <input type="text" class="form-control" id="nomeMorador" required>
+                        <label for="nomeMorador">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="cadastroPorteiros.nome" required>
                     </div>
+
                     <div class="form-group">
                         <label for="cpf">CPF:</label>
-                        <input type="text" class="form-control" id="cpf" required>
+                        <input type="text" class="form-control" id="cpf" name="cpf" [(ngModel)]="cadastroPorteiros.cpf" required>
                     </div>
                     <div class="form-group">
                         <label for="endereço">Endereço:</label>
-                        <input type="text" class="form-control" id="endereço" required>
+                        <input type="text" class="form-control" id="endereço" name="endereço" [(ngModel)]="cadastroPorteiros.endereco" required>
                     </div>
                     <div class="form-group">
                         <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" required>
+                        <input type="text" class="form-control" id="telefone" name="telefone" [(ngModel)]="cadastroPorteiros.telefone" required>
                     </div>
                     <div class="form-group">
-                        <label for="telefone">Data Contratação:</label>
-                        <input type="date" class="form-control" id="dataContratacao" required>
+                        <label for="telefone">Data da contratação:</label>
+                        <input type="date" class="form-control" id="dataContratacao" name="dataContratacao" [(ngModel)]="cadastroPorteiros.dataContratacao" required>
                     </div>
                 </div>
                 <div class="container col-sm-4">
                     
                     <div class="form-group">
                         <label for="turno">Turno de trabalho:</label>
-                        <input type="text" class="form-control" id="turno" required>
+                        <input type="text" class="form-control" id="turno" name="turno" [(ngModel)]="cadastroPorteiros.turno"required>
                     </div>
                     <div class="form-group">
-                        <label for="dataNascimento">Data de Nascimento:</label>
-                        <input type="date" class="form-control" id="dataNascimento" required>
+                        <label for="dataNascimento">Data de nascimento:</label>
+                        <input type="date" class="form-control" id="dataNascimento"  name="dataNascimento" [(ngModel)]="cadastroPorteiros.dataNascimento"required>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    
+
                 </div>
                 <div class="col-sm-4">
                     <img src="../../../assets/cadastroPorteiros.jpg" width="100%" alt="">

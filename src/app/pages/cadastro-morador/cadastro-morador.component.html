@@ -3,13 +3,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="container cadastro mt-3">
-            <h2 class="mb-4 titulo">Formulário de Cadastro de Moradores</h2>
+            <h2 class="mb-4 titulo">Cadastro de moradores</h2>
             <form id="cadastroMorador" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div class="container col-sm-4">
                         <div class="form-group">
-                            <label for="nomeMorador">Nome do Morador:</label>
-                            <input type="text" class="form-control" id="nomeMorador" name="nomeMorador"[(ngModel)]="cadastroMorador.nome" required>
+                            <label for="nomeMorador">Nome:</label>
+                            <input type="text" class="form-control" id="nomeMorador" name="nomeMorador" [(ngModel)]="cadastroMorador.nome" required>
                         </div>
                         <div class="form-group">
                             <label for="andar">Andar:</label>
@@ -17,25 +17,25 @@
                         </div>
                         <div class="form-group">
                             <label for="numeroApartamento">Número do Apartamento:</label>
-                            <input type="text" class="form-control" id="numeroApartamento" name="numeroApartamento" [(ngModel)]="cadastroMorador.numeroApto"required>
+                            <input type="number" class="form-control" id="numeroApartamento" name="numeroApartamento" [(ngModel)]="cadastroMorador.numeroApto" required>
                         </div>
                         <div class="form-group">
                             <label for="vagasGaragem">Vagas de Garagem:</label>
-                            <input type="text" class="form-control" id="vagasGaragem" name="vagasGaragem"[(ngModel)]="cadastroMorador.vagasGaragem" required>
+                            <input type="number" class="form-control" id="vagasGaragem" name="vagasGaragem" [(ngModel)]="cadastroMorador.vagasGaragem" required>
                         </div>
                     </div>
                     <div class="container col-sm-4">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="cadastroMorador.email"required>
+                            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="cadastroMorador.email" required>
                         </div>
                         <div class="form-group">
                             <label for="dataNascimento">Data de Nascimento:</label>
-                            <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="cadastroMorador.dataNascimento" required>
+                            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="cadastroMorador.dataNascimento" required>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
-                            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="cadastroMorador.status"required>
+                            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="cadastroMorador.status" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
@@ -46,5 +46,4 @@
             </form>
         </div>
     </div>
-
-    
+</div>
