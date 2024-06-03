@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Porteiro } from '../app/models/porteiro'; 
 import { Observable } from 'rxjs';
 
@@ -33,6 +33,16 @@ async deleteData(id: string) {
     console.log("Deletado com sucesso");
   } catch (error) {
     console.error('Erro ao deletar:', error);
+  }
+}
+
+async updateData(porteiro: Porteiro) {
+  try {
+    const docRef = doc(this.firestore, 'porteiro', porteiro.id);
+    await updateDoc(docRef, { ...porteiro });
+    console.log("Atualizado com sucesso");
+  } catch (error) {
+    console.error('Erro ao editar:', error);
   }
 }
 

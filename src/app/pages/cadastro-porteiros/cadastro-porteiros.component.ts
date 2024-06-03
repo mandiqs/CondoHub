@@ -10,6 +10,8 @@ import { Porteiro } from '../../models/porteiro';
 export class CadastroPorteirosComponent implements OnInit {
 
   cadastroPorteiro: Porteiro[] = [];
+  porteiroEmEdicao?: Porteiro;
+
   cadastroPorteiros: Porteiro = {
     nome: "",
     turno: "",
@@ -74,4 +76,27 @@ export class CadastroPorteirosComponent implements OnInit {
       console.log("Não encontrado");
     } 
   }
+
+  onEdit(porteiro: Porteiro) {
+    this.porteiroEmEdicao = { ...porteiro };
+  }
+
+  onSave(porteiro: Porteiro) {
+    if (porteiro.id) {
+      this.cadastrarPorteiroService.updateData(porteiro)
+        .then(() => {
+          this.loadData(); // Recarregar os dados após atualizar
+          console.log("Porteiro atualizado com sucesso");
+          this.porteiroEmEdicao = undefined;
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar porteiro:', error);
+        });
+    }
+  }
+
+  onCancel() {
+    this.porteiroEmEdicao = undefined;
+  }
 }
+
