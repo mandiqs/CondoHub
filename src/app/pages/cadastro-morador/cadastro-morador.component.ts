@@ -5,11 +5,12 @@ import { Morador } from '../../models/morador';
 @Component({
   selector: 'app-cadastro-morador',
   templateUrl: './cadastro-morador.component.html',
-  styleUrls: ['./cadastro-morador.component.scss'] 
+  styleUrls: ['./cadastro-morador.component.scss']
 })
 export class CadastroMoradorComponent implements OnInit {
-  
+
   cadastroMoradores: Morador[] = [];
+  moradorEmEdicao?: Morador;
 
   cadastroMorador: Morador = {
     andar: 0,
@@ -25,11 +26,11 @@ export class CadastroMoradorComponent implements OnInit {
   constructor(private cadastrarMoradorService: CadastrarMoradorService) {}
 
   ngOnInit() {
-    this.cadastrarMoradorService.getData().subscribe((data: Morador[])=>{
+    this.cadastrarMoradorService.getData().subscribe((data: Morador[]) => {
       this.cadastroMoradores = data;
     });
   }
-  
+
   onSubmit() {
     this.cadastrarMoradorService.saveData(this.cadastroMorador)
       .then(() => {
@@ -55,7 +56,7 @@ export class CadastroMoradorComponent implements OnInit {
   }
 
   loadData() {
-    this.cadastrarMoradorService.getData().subscribe((data: Morador[])=>{
+    this.cadastrarMoradorService.getData().subscribe((data: Morador[]) => {
       this.cadastroMoradores = data;
     });
   }
@@ -69,14 +70,40 @@ export class CadastroMoradorComponent implements OnInit {
           console.log("Deletado com sucesso");
         })
         .catch(error => {
-          console.error('Error deleting data:', error);
+          console.error('Erro ao deletar:', error);
         });
     } else {
       console.log("Não encontrado");
     }
   }
 
+  onEdit(morador: Morador) {
+    this.moradorEmEdicao = { ...morador };
+  }
+
+  onSave(morador: Morador) {
+    if (morador.id) {
+      this.cadastrarMoradorService.updateData(morador)
+        .then(() => {
+          this.loadData(); // Recarregar os dados após atualizar
+          console.log("Morador atualizado com sucesso");
+          this.moradorEmEdicao = undefined;
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar morador:', error);
+        });
+    }
+  }
+
+  onCancel() {
+    this.moradorEmEdicao = undefined;
+  }
 }
+
+
+
+
+
 
 
 

@@ -70,21 +70,53 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let morador of cadastroMoradores"> 
-                    <td>{{ morador.nome }}</td>
-                    <td>{{ morador.andar }}</td>
-                    <td>{{ morador.numeroApto }}</td>
-                    <td>{{ morador.vagasGaragem }}</td>
-                    <td>{{ morador.email }}</td>
-                    <td>{{ morador.dataNascimento }}</td>
-                    <td>{{ morador.status }}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm" (click)="onDelete(morador)">Deletar</button>
-                    </td>
+                <tr *ngFor="let morador of cadastroMoradores">
+                    <ng-container *ngIf="moradorEmEdicao?.id === morador.id; else readMode">
+                        <td>
+                            <input [(ngModel)]="morador.nome" placeholder="Nome" name="nomeEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.andar" type="number" placeholder="Andar" name="andarEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.numeroApto" type="number" placeholder="Número do Apartamento" name="numeroAptoEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.vagasGaragem" type="number" placeholder="Vagas de Garagem" name="vagasGaragemEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.email" type="email" placeholder="Email" name="emailEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.dataNascimento" type="date" placeholder="Data de Nascimento" name="dataNascimentoEmEdicao">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="morador.status" placeholder="Status" name="statusEmEdicao">
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm" (click)="onSave(morador)">Salvar</button>
+                            <button class="btn btn-secondary btn-sm" (click)="onCancel()">Cancelar</button>
+                        </td>
+                    </ng-container>
+                    <ng-template #readMode>
+                        <td>{{ morador.nome }}</td>
+                        <td>{{ morador.andar }}</td>
+                        <td>{{ morador.numeroApto }}</td>
+                        <td>{{ morador.vagasGaragem }}</td>
+                        <td>{{ morador.email }}</td>
+                        <td>{{ morador.dataNascimento }}</td>
+                        <td>{{ morador.status }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="onEdit(morador)">Editar</button>
+                            <button class="btn btn-danger btn-sm" (click)="onDelete(morador)">Deletar</button>
+                        </td>
+                    </ng-template>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+
+
 
