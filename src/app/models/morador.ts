@@ -1,4 +1,3 @@
-
 export interface Morador {
   andar: number;
   dataNascimento: string; 

@@ -10,11 +10,11 @@ import { Morador } from '../../models/morador';
 export class CadastroMoradorComponent {
 
   cadastroMorador: Morador = {
-    andar: 1,
+    andar: 0,
     dataNascimento: "",
     email: "",
     nome: "",
-    numeroApto: 1,
+    numeroApto: 0,
     vagasGaragem: 0,
     status: ""
   };
@@ -33,11 +33,11 @@ export class CadastroMoradorComponent {
 
   resetForm() {
     this.cadastroMorador = {
-      andar: 1,
+      andar: 0,
       dataNascimento: '',
       email: "",
       nome: "",
-      numeroApto: 1,
+      numeroApto: 0,
       vagasGaragem: 0,
       status: ""
     };

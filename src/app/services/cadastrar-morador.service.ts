@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Morador } from '../models/morador'; // Certifique-se de ajustar o caminho conforme necessário
+import { Morador } from '../models/morador'; 
 
 @Injectable({
   providedIn: 'root'
