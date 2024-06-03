@@ -6,4 +6,5 @@ export interface Morador {
   numeroApto: number;
   vagasGaragem: number;
   status: string;
+  id: string,
 }

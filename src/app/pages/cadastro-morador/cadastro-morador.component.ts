@@ -18,7 +18,8 @@ export class CadastroMoradorComponent implements OnInit {
     nome: "",
     numeroApto: 0,
     vagasGaragem: 0,
-    status: ""
+    status: "",
+    id: "",
   };
 
   constructor(private cadastrarMoradorService: CadastrarMoradorService) {}
@@ -48,7 +49,8 @@ export class CadastroMoradorComponent implements OnInit {
       nome: "",
       numeroApto: 0,
       vagasGaragem: 0,
-      status: ""
+      status: "",
+      id: "",
     };
   }
 
@@ -58,7 +60,24 @@ export class CadastroMoradorComponent implements OnInit {
     });
   }
 
+  onDelete(cadastroMorador: Morador) {
+    const cadastroMoradorId = cadastroMorador.id;
+    if (cadastroMoradorId) {
+      this.cadastrarMoradorService.deleteData(cadastroMoradorId)
+        .then(() => {
+          this.cadastroMoradores = this.cadastroMoradores.filter(item => item.id !== cadastroMoradorId);
+          console.log("Deletado com sucesso");
+        })
+        .catch(error => {
+          console.error('Error deleting data:', error);
+        });
+    } else {
+      console.log("Não encontrado");
+    }
+  }
+
 }
+
 
 
 
