@@ -58,7 +58,46 @@
             </div>
             </form>
         </div>
+    </div>
+</div>
 
+<!--LISTAR PORTEIROS-->
+<div class="row mt-5">
+    <div class="container-fluid">
+        <h2 class="mb-4 titulo">Lista de porteiros</h2>
+        <div class="form-group">
+            <label for="search">Pesquisar:</label>
+            <input type="text" class="form-control" id="search" placeholder="Digite para pesquisar...">
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Turno</th>
+                    <th>CPF</th>
+                    <th>Data de nascimento</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Data da contratação</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let porteiro of cadastroPorteiro"> <!--listar porteiros-->
+                    <td>{{ porteiro.nome }}</td>
+                    <td>{{ porteiro.turno }}</td>
+                    <td>{{ porteiro.cpf }}</td>
+                    <td>{{ porteiro.dataNascimento }}</td>
+                    <td>{{ porteiro.endereco }}</td>
+                    <td>{{ porteiro.telefone }}</td>
+                    <td>{{ porteiro.dataContratacao }}</td>
+                    <td>
 
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Deletar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

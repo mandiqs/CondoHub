@@ -26,14 +26,14 @@ export class CadastroMoradorComponent implements OnInit {
   ngOnInit() {
     this.cadastrarMoradorService.getData().subscribe((data: Morador[])=>{
       this.cadastroMoradores = data;
-    })
-      
+    });
   }
   
   onSubmit() {
     this.cadastrarMoradorService.saveData(this.cadastroMorador)
       .then(() => {
         this.resetForm();
+        this.loadData(); // Recarregar os dados após salvar
       })
       .catch(error => {
         console.error("Error saving data:", error);
@@ -51,6 +51,14 @@ export class CadastroMoradorComponent implements OnInit {
       status: ""
     };
   }
+
+  loadData() {
+    this.cadastrarMoradorService.getData().subscribe((data: Morador[])=>{
+      this.cadastroMoradores = data;
+    });
+  }
+
 }
+
 
 

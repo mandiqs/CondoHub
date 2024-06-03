@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Porteiro } from '../app/models/porteiro'; 
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,11 @@ export class CadastrarPorteiroService {
       console.error("Error", error);
     }
   }
+
+getData(): Observable<Porteiro[]>{ //listar porteiros
+  const collectionRef = collection(this.firestore, 'porteiro');
+  return collectionData(collectionRef, {idField: 'id'}) as Observable<Porteiro[]>
 }
+}
+
+
