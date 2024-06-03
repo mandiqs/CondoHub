@@ -47,3 +47,57 @@
         </div>
     </div>
 </div>
+
+<div class="row mt-5">
+    <div class="container-fluid">
+        <h2 class="mb-4 titulo">Lista de moradores</h2>
+        <div class="form-group">
+            <label for="search">Pesquisar:</label>
+            <input type="text" class="form-control" id="search" placeholder="Digite para pesquisar...">
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Andar</th>
+                    <th>Número do Apartamento</th>
+                    <th>Vagas de Garagem</th>
+                    <th>Email</th>
+                    <th>Data de Nascimento</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="usuariosCadastrados">
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete('João da Silva')">Deletar</button>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+function confirmDelete(nome) {
+    if (confirm(`Tem certeza que deseja deletar o usuário ${nome}?`)) {
+        // Lógica para deletar o usuário
+        alert(`${nome} deletado com sucesso.`);
+    }
+}
+
+document.getElementById('search').addEventListener('input', function() {
+    let filter = this.value.toUpperCase();
+    let rows = document.getElementById('usuariosCadastrados').getElementsByTagName('tr');
+    for (let i = 0; i < rows.length; i++) {
+        let cells = rows[i].getElementsByTagName('td');
+        let match = false;
+        for (let j = 0; j < cells.length; j++) {
+            if (cells[j].innerText.toUpperCase().includes(filter)) {
+                match = true;
+                break;
+            }
+        }
+        rows[i].style.display = match ? '' : 'none';
+    }
+});
+</script>
