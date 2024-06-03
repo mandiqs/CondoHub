@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CadastrarMoradorService } from '../../services/cadastrar-morador.service';
 import { Morador } from '../../models/morador';
 
@@ -7,7 +7,9 @@ import { Morador } from '../../models/morador';
   templateUrl: './cadastro-morador.component.html',
   styleUrls: ['./cadastro-morador.component.scss'] 
 })
-export class CadastroMoradorComponent {
+export class CadastroMoradorComponent implements OnInit {
+  
+  cadastroMoradores: Morador[] = [];
 
   cadastroMorador: Morador = {
     andar: 0,
@@ -20,6 +22,13 @@ export class CadastroMoradorComponent {
   };
 
   constructor(private cadastrarMoradorService: CadastrarMoradorService) {}
+
+  ngOnInit() {
+    this.cadastrarMoradorService.getData().subscribe((data: Morador[])=>{
+      this.cadastroMoradores = data;
+    })
+      
+  }
   
   onSubmit() {
     this.cadastrarMoradorService.saveData(this.cadastroMorador)

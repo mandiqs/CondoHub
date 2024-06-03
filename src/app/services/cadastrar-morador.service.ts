@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, CollectionReference } from '@angular/fire/firestore';
 import { Morador } from '../models/morador'; 
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,11 @@ export class CadastrarMoradorService {
       console.error("Error", error);
     }
   }
+  getData(): Observable<Morador[]>{ //listar moradores
+    const collectionRef = collection(this.firestore, 'morador');
+    return collectionData(collectionRef, {idField: 'id'}) as Observable<Morador[]>
+  }
 }
+
+
+
