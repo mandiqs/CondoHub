@@ -6,4 +6,5 @@ export interface Porteiro {
     endereco: string;
     telefone: string;
     dataContratacao: string;
+    id: string;
   }

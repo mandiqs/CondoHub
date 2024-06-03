@@ -25,6 +25,17 @@ getData(): Observable<Porteiro[]>{ //listar porteiros
   const collectionRef = collection(this.firestore, 'porteiro');
   return collectionData(collectionRef, {idField: 'id'}) as Observable<Porteiro[]>
 }
+
+async deleteData(id: string) {
+  try {
+    const docRef = doc(this.firestore, 'porteiro', id);
+    await deleteDoc(docRef);
+    console.log("Deletado com sucesso");
+  } catch (error) {
+    console.error('Erro ao deletar:', error);
+  }
+}
+
 }
 
 

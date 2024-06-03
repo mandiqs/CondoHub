@@ -32,7 +32,7 @@ export class CadastrarMoradorService {
       await deleteDoc(docRef);
       console.log("Deletado com sucesso");
     } catch (error) {
-      console.error('Error deleting data:', error);
+      console.error('Erro ao deletar:', error);
     }
   }
 }
