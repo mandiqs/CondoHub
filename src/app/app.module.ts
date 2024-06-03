@@ -34,7 +34,7 @@ import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-m
     CadastroMoradorComponent,
     CadastroPorteirosComponent,
     CadastroAvisosComponent,
-    GerenciarMoradorComponent
+    GerenciarMoradorComponent,
   ],
   imports: [
     BrowserModule,
