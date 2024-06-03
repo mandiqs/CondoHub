@@ -13,6 +13,7 @@ export class CadastroAvisosComponent implements OnInit{
     titulo: "",
     data: "",
     mensagem: "",
+    id: "",
   };
 
   constructor(private cadastrarAvisoService: CadastrarAvisoService) {}
@@ -39,6 +40,7 @@ export class CadastroAvisosComponent implements OnInit{
       titulo: "",
       data: "",
       mensagem: "",
+      id: "",
     };
   }
 
@@ -46,5 +48,21 @@ export class CadastroAvisosComponent implements OnInit{
     this.cadastrarAvisoService.getData().subscribe((data: Aviso[])=>{
       this.cadastroAviso = data;
     });
+  }
+
+  onDelete(cadastroAvisos: Aviso) {
+    const cadastroAvisosId = cadastroAvisos.id;
+    if (cadastroAvisosId) {
+      this.cadastrarAvisoService.deleteData(cadastroAvisosId)
+        .then(() => {
+          this.cadastroAviso = this.cadastroAviso.filter(item => item.id !== cadastroAvisosId);
+          console.log("Deletado com sucesso");
+        })
+        .catch(error => {
+          console.error('Error deleting data:', error);
+        });
+    } else {
+      console.log("Não encontrado");
+    }
   }
 }

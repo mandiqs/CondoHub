@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<!--LISTAR AVISOS-->
+<!--LISTAR, EDITAR E DELETAR AVISOS-->
 <div class="row mt-5">
     <div class="container-fluid">
         <h2 class="mb-4 titulo">Lista de avisos</h2>
@@ -57,13 +57,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let aviso of cadastroAviso"> <!--listar avisos-->
+                <tr *ngFor="let aviso of cadastroAviso"> 
                     <td>{{ aviso.titulo }}</td>
                     <td>{{ aviso.data }}</td>
                     <td>{{ aviso.mensagem }}</td>
                     <td>
                         <button class="btn btn-warning btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm">Deletar</button>
+                        <button class="btn btn-danger btn-sm" (click)="onDelete(aviso)">Deletar</button>
                     </td>
                 </tr>
             </tbody>

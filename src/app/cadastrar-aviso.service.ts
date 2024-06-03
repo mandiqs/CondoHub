@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
 import { Aviso } from '../app/models/aviso'; 
 import { Observable } from 'rxjs';
 
@@ -25,4 +25,14 @@ export class CadastrarAvisoService {
     const collectionRef = collection(this.firestore, 'aviso');
     return collectionData(collectionRef, {idField: 'id'}) as Observable<Aviso[]>
   }
+
+  async deleteData(id: string) {
+    try {
+      const docRef = doc(this.firestore, 'aviso', id);
+      await deleteDoc(docRef);
+      console.log("Deletado com sucesso");
+    } catch (error) {
+      console.error('Erro ao deletar:', error);
+    }
+}
 }

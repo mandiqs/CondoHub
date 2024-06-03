@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CadastrarPorteiroService } from '../../cadastrar-porteiro.service';
 import { Porteiro } from '../../models/porteiro';
 
@@ -18,6 +18,7 @@ export class CadastroPorteirosComponent implements OnInit {
     endereco: "",
     telefone: "",
     dataContratacao: "",
+    id: "",
   };
 
   constructor(private cadastrarPorteiroService: CadastrarPorteiroService) {}
@@ -48,6 +49,7 @@ export class CadastroPorteirosComponent implements OnInit {
       endereco: "",
       telefone: "",
       dataContratacao: "",
+      id: "",
     };
   }
 
@@ -57,5 +59,19 @@ export class CadastroPorteirosComponent implements OnInit {
     });
   }
 
-
+  onDelete(cadastroPorteiros: Porteiro) {
+    const cadastroPorteirosId = cadastroPorteiros.id;
+    if (cadastroPorteirosId) {
+      this.cadastrarPorteiroService.deleteData(cadastroPorteirosId)
+        .then(() => {
+          this.cadastroPorteiro = this.cadastroPorteiro.filter(item => item.id !== cadastroPorteirosId);
+          console.log("Deletado com sucesso");
+        })
+        .catch(error => {
+          console.error('Erro ao deletar:', error);
+        });
+    } else {
+      console.log("Não encontrado");
+    } 
+  }
 }

@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<!--LISTAR PORTEIROS-->
+<!--LISTAR, EDITAR E DELETAR PORTEIROS-->
 <div class="row mt-5">
     <div class="container-fluid">
         <h2 class="mb-4 titulo">Lista de porteiros</h2>
@@ -83,7 +83,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let porteiro of cadastroPorteiro"> <!--listar porteiros-->
+                <tr *ngFor="let porteiro of cadastroPorteiro">
                     <td>{{ porteiro.nome }}</td>
                     <td>{{ porteiro.turno }}</td>
                     <td>{{ porteiro.cpf }}</td>
@@ -94,7 +94,7 @@
                     <td>
 
                         <button class="btn btn-warning btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm">Deletar</button>
+                        <button class="btn btn-danger btn-sm" (click)="onDelete(porteiro)">Deletar</button>
                     </td>
                 </tr>
             </tbody>

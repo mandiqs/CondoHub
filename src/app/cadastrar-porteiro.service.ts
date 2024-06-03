@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
 import { Porteiro } from '../app/models/porteiro'; 
 import { Observable } from 'rxjs';
 
@@ -25,6 +25,17 @@ getData(): Observable<Porteiro[]>{ //listar porteiros
   const collectionRef = collection(this.firestore, 'porteiro');
   return collectionData(collectionRef, {idField: 'id'}) as Observable<Porteiro[]>
 }
+
+async deleteData(id: string) {
+  try {
+    const docRef = doc(this.firestore, 'porteiro', id);
+    await deleteDoc(docRef);
+    console.log("Deletado com sucesso");
+  } catch (error) {
+    console.error('Erro ao deletar:', error);
+  }
+}
+
 }
 
 
