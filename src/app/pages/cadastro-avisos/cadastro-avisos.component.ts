@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { CadastrarAvisoService } from '../../cadastrar-aviso.service';
 import { Aviso } from '../../models/aviso';
 
@@ -7,8 +7,8 @@ import { Aviso } from '../../models/aviso';
   templateUrl: './cadastro-avisos.component.html',
   styleUrls: ['./cadastro-avisos.component.scss']
 })
-export class CadastroAvisosComponent {
-
+export class CadastroAvisosComponent implements OnInit{
+  cadastroAviso: Aviso[] = [];
   cadastroAvisos: Aviso = {
     titulo: "",
     data: "",
@@ -17,15 +17,22 @@ export class CadastroAvisosComponent {
 
   constructor(private cadastrarAvisoService: CadastrarAvisoService) {}
   
+  ngOnInit() {
+    this.cadastrarAvisoService.getData().subscribe((data: Aviso[])=>{
+      this.cadastroAviso = data;
+    });
+  }
+
   onSubmit() {
     this.cadastrarAvisoService.saveData(this.cadastroAvisos)
-      .then(() => {
-        this.resetForm();
-      })
-      .catch(error => {
-        console.error("Error saving data:", error);
-      });
-  }
+    .then(() => {
+      this.resetForm();
+      this.loadData(); // Recarregar os dados após salvar
+    })
+    .catch(error => {
+      console.error("Error saving data:", error);
+    });
+}
 
   resetForm() {
     this.cadastroAvisos = {
@@ -33,5 +40,11 @@ export class CadastroAvisosComponent {
       data: "",
       mensagem: "",
     };
+  }
+
+  loadData() {
+    this.cadastrarAvisoService.getData().subscribe((data: Aviso[])=>{
+      this.cadastroAviso = data;
+    });
   }
 }

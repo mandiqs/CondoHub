@@ -36,6 +36,37 @@
             </div>
             </form>
         </div>
+    </div>
+</div>
 
+<!--LISTAR AVISOS-->
+<div class="row mt-5">
+    <div class="container-fluid">
+        <h2 class="mb-4 titulo">Lista de avisos</h2>
+        <div class="form-group">
+            <label for="search">Pesquisar:</label>
+            <input type="text" class="form-control" id="search" placeholder="Digite para pesquisar...">
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Data de emissão</th>
+                    <th>Mensagem</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let aviso of cadastroAviso"> <!--listar avisos-->
+                    <td>{{ aviso.titulo }}</td>
+                    <td>{{ aviso.data }}</td>
+                    <td>{{ aviso.mensagem }}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+                        <button class="btn btn-danger btn-sm">Deletar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

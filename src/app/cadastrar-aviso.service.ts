@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc } from '@angular/fire/firestore';
 import { Aviso } from '../app/models/aviso'; 
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class CadastrarAvisoService {
     } catch (error) {
       console.error("Error", error);
     }
+  }
+
+  getData(): Observable<Aviso[]>{ //listar avisos
+    const collectionRef = collection(this.firestore, 'aviso');
+    return collectionData(collectionRef, {idField: 'id'}) as Observable<Aviso[]>
   }
 }
