@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CadastrarAvisoService } from '../../cadastrar-aviso.service';
 import { Aviso } from '../../models/aviso';
 
@@ -7,8 +7,10 @@ import { Aviso } from '../../models/aviso';
   templateUrl: './cadastro-avisos.component.html',
   styleUrls: ['./cadastro-avisos.component.scss']
 })
-export class CadastroAvisosComponent implements OnInit{
+export class CadastroAvisosComponent implements OnInit {
   cadastroAviso: Aviso[] = [];
+  avisoEmEdicao?: Aviso;
+
   cadastroAvisos: Aviso = {
     titulo: "",
     data: "",
@@ -19,21 +21,21 @@ export class CadastroAvisosComponent implements OnInit{
   constructor(private cadastrarAvisoService: CadastrarAvisoService) {}
   
   ngOnInit() {
-    this.cadastrarAvisoService.getData().subscribe((data: Aviso[])=>{
+    this.cadastrarAvisoService.getData().subscribe((data: Aviso[]) => {
       this.cadastroAviso = data;
     });
   }
 
   onSubmit() {
     this.cadastrarAvisoService.saveData(this.cadastroAvisos)
-    .then(() => {
-      this.resetForm();
-      this.loadData(); // Recarregar os dados após salvar
-    })
-    .catch(error => {
-      console.error("Error saving data:", error);
-    });
-}
+      .then(() => {
+        this.resetForm();
+        this.loadData(); // Recarregar os dados após salvar
+      })
+      .catch(error => {
+        console.error("Error saving data:", error);
+      });
+  }
 
   resetForm() {
     this.cadastroAvisos = {
@@ -45,7 +47,7 @@ export class CadastroAvisosComponent implements OnInit{
   }
 
   loadData() {
-    this.cadastrarAvisoService.getData().subscribe((data: Aviso[])=>{
+    this.cadastrarAvisoService.getData().subscribe((data: Aviso[]) => {
       this.cadastroAviso = data;
     });
   }
@@ -65,4 +67,27 @@ export class CadastroAvisosComponent implements OnInit{
       console.log("Não encontrado");
     }
   }
+
+  onEdit(aviso: Aviso) {
+    this.avisoEmEdicao = { ...aviso };
+  }
+
+  onSave(aviso: Aviso) {
+    if (aviso.id) {
+      this.cadastrarAvisoService.updateData(aviso)
+        .then(() => {
+          this.loadData(); // Recarregar os dados após atualizar
+          console.log("Aviso atualizado com sucesso");
+          this.avisoEmEdicao = undefined;
+        })
+        .catch(error => {
+          console.error('Erro ao atualizar o aviso:', error);
+        });
+    }
+  }
+
+  onCancel() {
+    this.avisoEmEdicao = undefined;
+  }
 }
+

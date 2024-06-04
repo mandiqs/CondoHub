@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { Aviso } from '../app/models/aviso'; 
 import { Observable } from 'rxjs';
 
@@ -35,4 +35,14 @@ export class CadastrarAvisoService {
       console.error('Erro ao deletar:', error);
     }
 }
+
+  async updateData(aviso: Aviso) {
+    try {
+      const docRef = doc(this.firestore, 'aviso', aviso.id);
+      await updateDoc(docRef, { ...aviso });
+      console.log("Atualizado com sucesso");
+    } catch (error) {
+      console.error('Erro ao editar:', error);
+    }
+  }
 }
