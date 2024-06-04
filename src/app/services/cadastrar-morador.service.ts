@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, doc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { Morador } from '../models/morador'; 
 import { Observable } from 'rxjs';
 
@@ -32,10 +32,21 @@ export class CadastrarMoradorService {
       await deleteDoc(docRef);
       console.log("Deletado com sucesso");
     } catch (error) {
-      console.error('Erro ao deletar:', error);
+      console.error('Error deleting data:', error);
+    }
+  }
+
+  async updateData(morador: Morador) {
+    try {
+      const docRef = doc(this.firestore, 'morador', morador.id);
+      await updateDoc(docRef, { ...morador });
+      console.log("Atualizado com sucesso");
+    } catch (error) {
+      console.error('Error updating data:', error);
     }
   }
 }
+
 
 
 

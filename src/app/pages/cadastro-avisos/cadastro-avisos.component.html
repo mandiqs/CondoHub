@@ -2,47 +2,38 @@
 
 <div class="container-fluid">
     <div class="row">
-        
         <div class="container cadastro mt-3">
-            <h2 class="mb-4 titulo">Cadastro de avisos</h2>
-
-            <form id="cadastroAvisos" (ngSubmit)="onSubmit()">
-
-            <div class="row">
-
-                <div class="container col-sm-8">
-                    
-                    <div class="form-group">
-                        <label for="tituloAviso">Título do aviso:</label>
-                        <input type="text" class="form-control" id="tituloAviso" name="tituloAviso" [(ngModel)]="cadastroAvisos.titulo" required>
+            <h2 class="mb-4 titulo">Cadastro de Avisos</h2>
+            <form id="cadastroAviso" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="container col-sm-4">
+                        <div class="form-group">
+                            <label for="tituloAviso">Título:</label>
+                            <input type="text" class="form-control" id="tituloAviso" name="tituloAviso" [(ngModel)]="cadastroAvisos.titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataAviso">Data:</label>
+                            <input type="date" class="form-control" id="dataAviso" name="dataAviso" [(ngModel)]="cadastroAvisos.data" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagemAviso">Mensagem:</label>
+                            <textarea class="form-control" id="mensagemAviso" name="mensagemAviso" [(ngModel)]="cadastroAvisos.mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar Aviso</button>
                     </div>
-
-                    <div class="form-group">
-                        <label for="dataEmissao">Data de emissão:</label>
-                        <input type="date" class="form-control" id="dataEmissao" name="dataEmissao" [(ngModel)]="cadastroAvisos.data" required>
+                    <div class="col-sm-4 imagem">
+                        <img src="../../../assets/cadastroAvisos.jpg" width="100%" alt="">
                     </div>
-
-                    <div class="form-group">
-                        <label for="mensagem">Mensagem</label>
-                        <textarea class="form-control" id="mensagem" name="mensagem" [(ngModel)]="cadastroAvisos.mensagem"rows="4"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
-                <div class="col-sm-4">
-                    <img src="../../../assets/cadastroAvisos.jpg" width="100%" alt="">
-
-                </div>
-            </div>
             </form>
         </div>
     </div>
 </div>
 
-<!--LISTAR, EDITAR E DELETAR AVISOS-->
+<!-- LISTAR, EDITAR E DELETAR AVISO -->
 <div class="row mt-5">
     <div class="container-fluid">
-        <h2 class="mb-4 titulo">Lista de avisos</h2>
+        <h2 class="mb-4 titulo">Lista de Avisos</h2>
         <div class="form-group">
             <label for="search">Pesquisar:</label>
             <input type="text" class="form-control" id="search" placeholder="Digite para pesquisar...">
@@ -51,22 +42,40 @@
             <thead>
                 <tr>
                     <th>Título</th>
-                    <th>Data de emissão</th>
+                    <th>Data</th>
                     <th>Mensagem</th>
                     <th>Opções</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let aviso of cadastroAviso"> 
-                    <td>{{ aviso.titulo }}</td>
-                    <td>{{ aviso.data }}</td>
-                    <td>{{ aviso.mensagem }}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm" (click)="onDelete(aviso)">Deletar</button>
-                    </td>
+                <tr *ngFor="let aviso of cadastroAviso">
+                    <ng-container *ngIf="avisoEmEdicao?.id === aviso.id; else readMode">
+                        <td>
+                            <input [(ngModel)]="aviso.titulo" placeholder="Título" name="tituloEmEdicao{{aviso.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="aviso.data" type="date" placeholder="Data" name="dataEmEdicao{{aviso.id}}">
+                        </td>
+                        <td>
+                            <textarea [(ngModel)]="aviso.mensagem" placeholder="Mensagem" name="mensagemEmEdicao{{aviso.id}}"></textarea>
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm" (click)="onSave(aviso)">Salvar</button>
+                            <button class="btn btn-secondary btn-sm" (click)="onCancel()">Cancelar</button>
+                        </td>
+                    </ng-container>
+                    <ng-template #readMode>
+                        <td>{{ aviso.titulo }}</td>
+                        <td>{{ aviso.data }}</td>
+                        <td>{{ aviso.mensagem }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="onEdit(aviso)">Editar</button>
+                            <button class="btn btn-danger btn-sm" (click)="onDelete(aviso)">Deletar</button>
+                        </td>
+                    </ng-template>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+

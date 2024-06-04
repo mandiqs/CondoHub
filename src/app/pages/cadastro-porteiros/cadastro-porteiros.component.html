@@ -1,61 +1,48 @@
 <app-menu></app-menu>
 
-
 <div class="container-fluid">
-
     <div class="row">
-        
-
         <div class="container cadastro mt-3">
             <h2 class="mb-4 titulo">Cadastro de porteiros</h2>
-            
             <form id="cadastroPorteiros" (ngSubmit)="onSubmit()">
-
-            <div class="row">
-
-                <div class="container col-sm-4">
-                    
-                    <div class="form-group">
-                        <label for="nomeMorador">Nome:</label>
-                        <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="cadastroPorteiros.nome" required>
+                <div class="row">
+                    <div class="container col-sm-4">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" [(ngModel)]="cadastroPorteiros.nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" class="form-control" id="cpf" name="cpf" [(ngModel)]="cadastroPorteiros.cpf" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endereço">Endereço:</label>
+                            <input type="text" class="form-control" id="endereço" name="endereço" [(ngModel)]="cadastroPorteiros.endereco" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" class="form-control" id="telefone" name="telefone" [(ngModel)]="cadastroPorteiros.telefone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataContratacao">Data da contratação:</label>
+                            <input type="date" class="form-control" id="dataContratacao" name="dataContratacao" [(ngModel)]="cadastroPorteiros.dataContratacao" required>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="cpf">CPF:</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" [(ngModel)]="cadastroPorteiros.cpf" required>
+                    <div class="container col-sm-4">
+                        <div class="form-group">
+                            <label for="turno">Turno de trabalho:</label>
+                            <input type="text" class="form-control" id="turno" name="turno" [(ngModel)]="cadastroPorteiros.turno" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dataNascimento">Data de nascimento:</label>
+                            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" [(ngModel)]="cadastroPorteiros.dataNascimento" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
-                    <div class="form-group">
-                        <label for="endereço">Endereço:</label>
-                        <input type="text" class="form-control" id="endereço" name="endereço" [(ngModel)]="cadastroPorteiros.endereco" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" [(ngModel)]="cadastroPorteiros.telefone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefone">Data da contratação:</label>
-                        <input type="date" class="form-control" id="dataContratacao" name="dataContratacao" [(ngModel)]="cadastroPorteiros.dataContratacao" required>
+                    <div class="col-sm-4">
+                        <img src="../../../assets/cadastroPorteiros.jpg" width="100%" alt="">
                     </div>
                 </div>
-                <div class="container col-sm-4">
-                    
-                    <div class="form-group">
-                        <label for="turno">Turno de trabalho:</label>
-                        <input type="text" class="form-control" id="turno" name="turno" [(ngModel)]="cadastroPorteiros.turno"required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dataNascimento">Data de nascimento:</label>
-                        <input type="date" class="form-control" id="dataNascimento"  name="dataNascimento" [(ngModel)]="cadastroPorteiros.dataNascimento"required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
-
-                </div>
-                <div class="col-sm-4">
-                    <img src="../../../assets/cadastroPorteiros.jpg" width="100%" alt="">
-
-                </div>
-            </div>
             </form>
         </div>
     </div>
@@ -84,20 +71,49 @@
             </thead>
             <tbody>
                 <tr *ngFor="let porteiro of cadastroPorteiro">
-                    <td>{{ porteiro.nome }}</td>
-                    <td>{{ porteiro.turno }}</td>
-                    <td>{{ porteiro.cpf }}</td>
-                    <td>{{ porteiro.dataNascimento }}</td>
-                    <td>{{ porteiro.endereco }}</td>
-                    <td>{{ porteiro.telefone }}</td>
-                    <td>{{ porteiro.dataContratacao }}</td>
-                    <td>
-
-                        <button class="btn btn-warning btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm" (click)="onDelete(porteiro)">Deletar</button>
-                    </td>
+                    <ng-container *ngIf="porteiroEmEdicao?.id === porteiro.id; else readMode">
+                        <td>
+                            <input [(ngModel)]="porteiro.nome" placeholder="Nome" name="nomeEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.turno" placeholder="Turno" name="turnoEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.cpf" placeholder="CPF" name="cpfEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.dataNascimento" type="date" placeholder="Data de nascimento" name="dataNascimentoEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.endereco" placeholder="Endereço" name="enderecoEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.telefone" placeholder="Telefone" name="telefoneEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <input [(ngModel)]="porteiro.dataContratacao" type="date" placeholder="Data da contratação" name="dataContratacaoEmEdicao{{porteiro.id}}">
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm" (click)="onSave(porteiro)">Salvar</button>
+                            <button class="btn btn-secondary btn-sm" (click)="onCancel()">Cancelar</button>
+                        </td>
+                    </ng-container>
+                    <ng-template #readMode>
+                        <td>{{ porteiro.nome }}</td>
+                        <td>{{ porteiro.turno }}</td>
+                        <td>{{ porteiro.cpf }}</td>
+                        <td>{{ porteiro.dataNascimento }}</td>
+                        <td>{{ porteiro.endereco }}</td>
+                        <td>{{ porteiro.telefone }}</td>
+                        <td>{{ porteiro.dataContratacao }}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" (click)="onEdit(porteiro)">Editar</button>
+                            <button class="btn btn-danger btn-sm" (click)="onDelete(porteiro)">Deletar</button>
+                        </td>
+                    </ng-template>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
