@@ -6,8 +6,9 @@ import { CadastroPorteirosComponent } from './pages/cadastro-porteiros/cadastro-
 import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos.component';
 import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
 import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
 
-const routes: Routes = [ //definição rota componente login
+const routes: Routes = [ 
   { path: '', component: LoginComponent}, 
   { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [ //definição rota componente login
   { path: 'cadastro-porteiros', component: CadastroPorteirosComponent},
   { path: 'cadastro-avisos', component: CadastroAvisosComponent},
   { path: 'gerenciar-morador', component: GerenciarMoradorComponent},
+  { path: 'registro', component: RegistroComponent},
   
 ];
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { DadosUsuario } from '../app/models/dados-usuario';
 
@@ -20,6 +20,18 @@ export class AuthService {
         alert('E-mail ou senha incorreto!');
         throw error;
       });
+      }
+
+  async registro(dadosUsuario: DadosUsuario): Promise<void> {
+    try {
+      await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      alert('Cadastro realizado com sucesso!');
+      this.router.navigate(['home']);
+    } catch (error) {
+      console.log('Error:', error);
+      alert('Erro ao cadastrar usuário!');
+      throw error;
+    }
   }
 
   logout(): void {

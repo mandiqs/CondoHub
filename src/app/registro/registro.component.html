@@ -1,9 +1,9 @@
-<div class="area-login-background d-none d-md-block"></div>
+<div class="area-cadastro-background d-none d-md-block"></div>
 
 <div class="area-form">
-    <form (ngSubmit)="login()">
-        <h1 class="titulo">Login</h1>
-        <h2 class="subtitulo">Faça seu login</h2>
+    <form (ngSubmit)="registro()">
+        <h1 class="titulo">Cadastro</h1>
+        <h2 class="subtitulo">Crie sua conta</h2>
 
         <div class="mb-3">
             <label for="email" class="form-label">E-mail:</label>
@@ -13,16 +13,9 @@
             <label for="password" class="form-label">Senha:</label>
             <input type="password" class="form-control" id="senha" [(ngModel)]="user.senha" name="senha" required>
         </div>
-        <button type="submit" class="btn btn-primary">Acessar</button>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 
     <p class="footer">2024 | Desenvolvido por Amanda e Carlos</p>
-    <div>
-    <p>Não tem uma conta? <a routerLink="registro">Cadastre-se</a></p>
-    </div>
 </div>
 
-
-
-
-        

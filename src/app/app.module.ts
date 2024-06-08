@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, platformBrowser } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
-
 //Material Icons
 import { MatIconModule } from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -22,8 +20,8 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
-import { HeaderComponent } from './header/header.component';
-
+import { RegistroComponent } from './registro/registro.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -36,7 +34,7 @@ import { HeaderComponent } from './header/header.component';
     CadastroPorteirosComponent,
     CadastroAvisosComponent,
     GerenciarMoradorComponent,
-    HeaderComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,
