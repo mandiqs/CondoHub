@@ -11,13 +11,21 @@ export class AuthService {
   constructor(private auth: Auth, private router: Router) {}
 
   login(dadosUsuario: DadosUsuario): Promise<void> {
-    return signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha).then(() => {
-      alert('Login feito com sucesso!');
-      this.router.navigate(['/']);
-    }).catch((error) => {
-      console.log('Error:', error);
-      alert('E-mail ou senha incorreto!');
+    return signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha)
+      .then(() => {
+        alert('Login feito com sucesso!');
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+        alert('E-mail ou senha incorreto!');
+        throw error;
+      });
+  }
+
+  logout(): void {
+    this.auth.signOut().then(() => {
+      sessionStorage.removeItem('user');
+      this.router.navigate(['login']);
     });
   }
 }
-

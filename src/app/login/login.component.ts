@@ -2,13 +2,11 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { DadosUsuario } from '../models/dados-usuario';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
 
@@ -20,9 +18,14 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   login(): void {
-    this.authService.login(this.user);
-    sessionStorage.setItem('user', this.user.email);
-    this.router.navigate(['home']);
+    this.authService.login(this.user)
+      .then(() => {
+        sessionStorage.setItem('user', this.user.email);
+        this.router.navigate(['home']);
+      })
+      .catch(error => {
+        console.log('Login error:', error);
+        alert('E-mail ou senha incorreto!');
+      });
   }
 }
-
