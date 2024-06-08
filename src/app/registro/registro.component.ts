@@ -12,7 +12,10 @@ export class RegistroComponent {
 
   user: DadosUsuario = {
     email: '',
-    senha: ''
+    senha: '',
+    nome: '',
+    apartamento: '',
+    id: ''
   };
 
   constructor(private authService: AuthService, private router: Router) {}
