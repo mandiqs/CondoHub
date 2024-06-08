@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonComponent } from './components/button/button.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -22,6 +22,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-m
     CadastroPorteirosComponent,
     CadastroAvisosComponent,
     GerenciarMoradorComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
