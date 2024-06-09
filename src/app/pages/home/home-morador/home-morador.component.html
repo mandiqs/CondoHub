@@ -1,1 +1,10 @@
-<p>home-morador works!</p>
+<div>
+    <h2>Avisos</h2>
+    <ul>
+      <li *ngFor="let aviso of avisos$ | async">
+        <h3>{{ aviso.titulo }}</h3>
+        <p>{{ aviso.conteudo }}</p>
+      </li>
+    </ul>
+  </div>
+  

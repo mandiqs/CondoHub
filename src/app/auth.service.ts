@@ -11,41 +11,41 @@ export class AuthService {
 
   constructor(private auth: Auth, private firestore: Firestore, private router: Router) {}
 
-  login(dadosUsuario: DadosUsuario): Promise<void> {
-    return signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha)
-      .then(async (userCredential) => {
-        const userRef = doc(this.firestore, "users", userCredential.user.uid);
-        const docSnap = await getDoc(userRef);
-        if (docSnap.exists()) {
-          const userType = docSnap.data()['tipoUsuario'];
-          if (userType === 'síndico') {
-            this.router.navigate(['home']); 
-          } else {
-            this.router.navigate(['home-morador'])
-          }
-          alert('Login feito com sucesso!');
+  async login(dadosUsuario: DadosUsuario): Promise<void> {
+    try {
+      const userCredential = await signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      const userRef = doc(this.firestore, "users", userCredential.user.uid);
+      const docSnap = await getDoc(userRef);
+      
+      if (docSnap.exists()) {
+        const userType = docSnap.data()['tipoUsuario'];
+        if (userType === 'síndico') {
+          this.router.navigate(['home']); 
         } else {
-          throw new Error("Erro ao logar");
+          this.router.navigate(['home-morador']);
         }
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-        alert('E-mail ou senha incorreto!');
-      });
+        alert('Login feito com sucesso!');
+      } else {
+        throw new Error("Erro ao logar");
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      throw error; // Adicione esta linha para garantir que o erro seja propagado para o componente
+    }
   }
 
   async registro(dadosUsuario: DadosUsuario): Promise<void> {
     try {
-      const moradorCredential = await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
-      await setDoc(doc(this.firestore, "morador", moradorCredential.user.uid), {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      await setDoc(doc(this.firestore, "users", userCredential.user.uid), {
         nome: dadosUsuario.nome,
         email: dadosUsuario.email,
         tipoUsuario: dadosUsuario.tipoUsuario, // Salvando o tipo de usuário no Firestore
       });
-      this.router.navigate([dadosUsuario.tipoUsuario === 'síndico' ? 'home-sindico' : 'home-morador']);
+      this.router.navigate([dadosUsuario.tipoUsuario === 'síndico' ? 'home' : 'home-morador']);
       alert('Cadastro realizado com sucesso!');
     } catch (error) {
-      console.log('Error:', error);
+      console.error('Erro:', error);
       alert('Erro ao cadastrar usuário!');
       throw error;
     }
@@ -58,3 +58,5 @@ export class AuthService {
     });
   }
 }
+
+
