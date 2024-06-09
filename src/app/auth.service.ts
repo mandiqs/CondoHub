@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { DadosUsuario } from '../app/models/dados-usuario';
 
@@ -8,29 +9,46 @@ import { DadosUsuario } from '../app/models/dados-usuario';
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth, private firestore: Firestore, private router: Router) {}
 
-  login(dadosUsuario: DadosUsuario): Promise<void> {
-    return signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha)
-      .then(() => {
+  async login(dadosUsuario: DadosUsuario): Promise<void> {
+    try {
+      const userCredential = await signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      const userRef = doc(this.firestore, "users", userCredential.user.uid);
+      const docSnap = await getDoc(userRef);
+      
+      if (docSnap.exists()) {
+        const userType = docSnap.data()['tipoUsuario'];
+        if (userType === 'síndico') {
+          this.router.navigate(['home']); 
+        } else if (userType === 'morador') {
+          this.router.navigate(['home-morador']);
+        } else {
+          throw new Error("Tipo de usuário desconhecido");
+        }
         alert('Login feito com sucesso!');
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-        alert('E-mail ou senha incorreto!');
-        throw error;
-      });
+      } else {
+        throw new Error("Usuário não encontrado");
       }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('E-mail ou senha incorretos!');
+    }
+  }
 
   async registro(dadosUsuario: DadosUsuario): Promise<void> {
     try {
-      await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      const userCredential = await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      await setDoc(doc(this.firestore, "users", userCredential.user.uid), {
+        nome: dadosUsuario.nome,
+        email: dadosUsuario.email,
+        tipoUsuario: dadosUsuario.tipoUsuario,
+      });
+      this.router.navigate([dadosUsuario.tipoUsuario === 'síndico' ? 'home' : 'home-morador']);
       alert('Cadastro realizado com sucesso!');
-      this.router.navigate(['home']);
     } catch (error) {
-      console.log('Error:', error);
+      console.error('Erro:', error);
       alert('Erro ao cadastrar usuário!');
-      throw error;
     }
   }
 
@@ -41,3 +59,7 @@ export class AuthService {
     });
   }
 }
+
+
+
+

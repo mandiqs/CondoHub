@@ -1,48 +1,58 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData, addDoc, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
-import { Aviso } from '../app/models/aviso'; 
 import { Observable } from 'rxjs';
+import { Aviso } from '../app/models/aviso';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CadastrarAvisoService {
-
   constructor(private firestore: Firestore) { }
 
-  async saveData(data: Aviso) {
-    try {
-      const collectionInstance = collection(this.firestore, 'aviso');
-      await addDoc(collectionInstance, data);
-      console.log("Salvo com sucesso");
-      console.log(data);
-    } catch (error) {
-      console.error("Error", error);
+  // Método para salvar ou atualizar um aviso
+  saveData(aviso: Aviso): Promise<void> {
+    const cleanAviso = {...aviso};
+    if (aviso.id) {
+      // Atualiza o aviso existente se um ID estiver presente
+      const docRef = doc(this.firestore, 'avisos', aviso.id);
+      return updateDoc(docRef, cleanAviso);
+    } else {
+      // Cria um novo aviso se não houver ID
+      const collectionRef = collection(this.firestore, 'avisos');
+      return addDoc(collectionRef, cleanAviso).then(docRef => {
+        console.log("Novo aviso adicionado com ID: ", docRef.id);
+        // Certifique-se de atualizar o ID do aviso após a criação para referência futura
+        aviso.id = docRef.id;
+      });
     }
   }
 
-  getData(): Observable<Aviso[]>{ //listar avisos
-    const collectionRef = collection(this.firestore, 'aviso');
-    return collectionData(collectionRef, {idField: 'id'}) as Observable<Aviso[]>
+  // Método para obter todos os avisos
+  getData(): Observable<Aviso[]> {
+    const collectionRef = collection(this.firestore, 'avisos');
+    return collectionData(collectionRef, { idField: 'id' }) as Observable<Aviso[]>;
   }
 
-  async deleteData(id: string) {
-    try {
-      const docRef = doc(this.firestore, 'aviso', id);
-      await deleteDoc(docRef);
-      console.log("Deletado com sucesso");
-    } catch (error) {
-      console.error('Erro ao deletar:', error);
+  // Método para deletar um aviso
+  deleteData(id: string): Promise<void> {
+    if (!id) {
+      throw new Error("ID é necessário para deletar um aviso");
     }
+    const docRef = doc(this.firestore, 'avisos', id);
+    return deleteDoc(docRef);
+  }
+
+  // Método para atualizar um aviso
+  updateData(aviso: Aviso): Promise<void> {
+    if (!aviso.id) {
+      throw new Error("ID é necessário para atualizar um aviso");
+    }
+    const cleanAviso = {...aviso}; // Cria uma cópia limpa do aviso para atualização
+    const docRef = doc(this.firestore, 'avisos', aviso.id);
+    return updateDoc(docRef, cleanAviso);
+  }
 }
 
-  async updateData(aviso: Aviso) {
-    try {
-      const docRef = doc(this.firestore, 'aviso', aviso.id);
-      await updateDoc(docRef, { ...aviso });
-      console.log("Atualizado com sucesso");
-    } catch (error) {
-      console.error('Erro ao editar:', error);
-    }
-  }
-}
+
+
+

@@ -15,6 +15,7 @@ export class LoginComponent {
     senha: '',
     nome: '',
     apartamento: '',
+    tipoUsuario: '',
     id: '',
   };
 
@@ -24,11 +25,12 @@ export class LoginComponent {
     this.authService.login(this.user)
       .then(() => {
         sessionStorage.setItem('user', this.user.email);
-        this.router.navigate(['home']);
+
       })
       .catch(error => {
-        console.log('Login error:', error);
+        console.error('Erro ao logar:', error);
         alert('E-mail ou senha incorreto!');
       });
   }
 }
+
