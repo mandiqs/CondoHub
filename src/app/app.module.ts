@@ -23,6 +23,7 @@ import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-m
 import { RegistroComponent } from './registro/registro.component';
 import { RouterModule } from '@angular/router';
 import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.component';
+import { MenuMoradorComponent } from './menu-morador/menu-morador.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.com
     GerenciarMoradorComponent,
     RegistroComponent,
     HomeMoradorComponent,
+    MenuMoradorComponent,
   ],
   imports: [
     BrowserModule,

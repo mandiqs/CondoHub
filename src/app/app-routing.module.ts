@@ -7,16 +7,23 @@ import { CadastroAvisosComponent } from './pages/cadastro-avisos/cadastro-avisos
 import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.component';
+import { MenuMoradorComponent } from './menu-morador/menu-morador.component';
+
 
 const routes: Routes = [ 
   { path: '', component: LoginComponent}, 
   { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent},
+  { path: 'home-morador', component: HomeMoradorComponent},
   { path: 'cadastro-morador', component: CadastroMoradorComponent},
   { path: 'cadastro-porteiros', component: CadastroPorteirosComponent},
   { path: 'cadastro-avisos', component: CadastroAvisosComponent},
   { path: 'gerenciar-morador', component: GerenciarMoradorComponent},
   { path: 'registro', component: RegistroComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' },
+  { path: 'menu-morador', component: MenuMoradorComponent }
   
 ];
 

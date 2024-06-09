@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, collection, query, where, collectionData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { HomeMorador } from '../../../models/home-morador.model';
+import { Firestore, collectionData, collection, query, where, doc, getDoc } from '@angular/fire/firestore';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Aviso } from '../../../models/aviso';
+import { CadastroAvisosComponent } from '../../cadastro-avisos/cadastro-avisos.component';
+import { CadastrarAvisoService } from '../../../cadastrar-aviso.service';
 
 @Component({
   selector: 'app-home-morador',
@@ -8,16 +13,48 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home-morador.component.scss']
 })
 export class HomeMoradorComponent implements OnInit {
-  avisos$: Observable<any[]> | undefined = undefined;  
+  avisos$: Observable<Aviso[]> | undefined;
+  morador: HomeMorador = {
+    id: '',
+    nome: '',
+    apartamento: '',
+    avisos: []
+  };
 
   constructor(private firestore: Firestore) {}
 
-  ngOnInit() {
-    const avisosRef = collection(this.firestore, 'avisos');
-    const q = query(avisosRef, where('eGeral', '==', true));
-    this.avisos$ = collectionData(q, { idField: 'docId' });
+  ngOnInit(): void {
+    const moradorId = sessionStorage.getItem('user'); //ID do morador armazenado na sessão
+    if (moradorId) {
+      this.loadMoradorData(moradorId);
+      this.loadAvisos(moradorId);
+    }
+  }
+
+  loadMoradorData(moradorId: string): void {
+    const moradorDocRef = doc(this.firestore, 'users', moradorId);
+    getDoc(moradorDocRef).then(docSnap => {
+      if (docSnap.exists()) {
+        this.morador = docSnap.data() as HomeMorador;
+      }
+    });
+  }
+
+  loadAvisos(moradorid: string): void {
+    const avisosCollectionRef = collection(this.firestore, 'avisos');
+    const avisosGeraisQuery = query(avisosCollectionRef, where('moradorid', '==', 'geral'));
+    const avisosEspecificosQuery = query(avisosCollectionRef, where('moradorid', '==', moradorid));
+
+    const avisosGerais$ = collectionData(avisosGeraisQuery, { idField: 'id' }) as Observable<Aviso[]>;
+    const avisosEspecificos$ = collectionData(avisosEspecificosQuery, { idField: 'id' }) as Observable<Aviso[]>;
+
+    this.avisos$ = combineLatest([avisosGerais$, avisosEspecificos$]).pipe(
+      map(([gerais, especificos]) => [...gerais, ...especificos])
+    );
   }
 }
+
+
 
 
 

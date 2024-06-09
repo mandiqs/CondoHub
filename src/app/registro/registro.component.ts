@@ -25,7 +25,6 @@ export class RegistroComponent {
     this.authService.registro(this.user)
       .then(() => {
         sessionStorage.setItem('user', this.user.email);
-        this.router.navigate(['home']);
       })
       .catch(error => {
         console.log('Erro ao cadastrar:', error);

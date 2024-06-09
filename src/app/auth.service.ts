@@ -21,16 +21,18 @@ export class AuthService {
         const userType = docSnap.data()['tipoUsuario'];
         if (userType === 'síndico') {
           this.router.navigate(['home']); 
-        } else {
+        } else if (userType === 'morador') {
           this.router.navigate(['home-morador']);
+        } else {
+          throw new Error("Tipo de usuário desconhecido");
         }
         alert('Login feito com sucesso!');
       } else {
-        throw new Error("Erro ao logar");
+        throw new Error("Usuário não encontrado");
       }
     } catch (error) {
       console.error('Erro:', error);
-      throw error; 
+      alert('E-mail ou senha incorretos!');
     }
   }
 
@@ -40,23 +42,24 @@ export class AuthService {
       await setDoc(doc(this.firestore, "users", userCredential.user.uid), {
         nome: dadosUsuario.nome,
         email: dadosUsuario.email,
-        tipoUsuario: dadosUsuario.tipoUsuario, // Salvando o tipo de usuário no Firestore
+        tipoUsuario: dadosUsuario.tipoUsuario,
       });
       this.router.navigate([dadosUsuario.tipoUsuario === 'síndico' ? 'home' : 'home-morador']);
       alert('Cadastro realizado com sucesso!');
     } catch (error) {
       console.error('Erro:', error);
       alert('Erro ao cadastrar usuário!');
-      throw error;
     }
   }
 
   logout(): void {
     this.auth.signOut().then(() => {
-      sessionStorage.removeItem('morador');
+      sessionStorage.removeItem('user');
       this.router.navigate(['login']);
     });
   }
 }
+
+
 
 
