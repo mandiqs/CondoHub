@@ -30,7 +30,7 @@ export class AuthService {
       }
     } catch (error) {
       console.error('Erro:', error);
-      throw error; // Adicione esta linha para garantir que o erro seja propagado para o componente
+      throw error; 
     }
   }
 

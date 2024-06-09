@@ -25,11 +25,10 @@ export class LoginComponent {
     this.authService.login(this.user)
       .then(() => {
         sessionStorage.setItem('user', this.user.email);
-        // A navegação já é tratada no AuthService, então podemos remover esta linha
-        // this.router.navigate(['home']);
+        this.router.navigate(['home']);
       })
       .catch(error => {
-        console.error('Login error:', error);
+        console.error('Erro ao logar:', error);
         alert('E-mail ou senha incorreto!');
       });
   }
