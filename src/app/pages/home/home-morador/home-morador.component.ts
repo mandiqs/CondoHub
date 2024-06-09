@@ -33,6 +33,7 @@ export class HomeMoradorComponent implements OnInit {
 
   loadMoradorData(moradorId: string): void {
     const moradorDocRef = doc(this.firestore, 'users', moradorId);
+    console.log(moradorId);
     getDoc(moradorDocRef).then(docSnap => {
       if (docSnap.exists()) {
         this.morador = docSnap.data() as HomeMorador;
