@@ -15,6 +15,7 @@ export class LoginComponent {
     senha: '',
     nome: '',
     apartamento: '',
+    tipoUsuario: '',
     id: '',
   };
 

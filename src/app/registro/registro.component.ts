@@ -15,6 +15,7 @@ export class RegistroComponent {
     senha: '',
     nome: '',
     apartamento: '',
+    tipoUsuario: '',
     id: ''
   };
 
