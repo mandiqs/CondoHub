@@ -3,4 +3,7 @@ export interface Aviso {
     data: string;
     mensagem: string;
     id: string;
+    moradorid: string;
+    tipo: string;
+
 }

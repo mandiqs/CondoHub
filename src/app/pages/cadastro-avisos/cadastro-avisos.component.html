@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="container cadastro mt-3">
-            <h2 class="mb-4 titulo">Cadastro de Avisos</h2>
+            <h2 class="mb-4 titulo">Cadastro de avisos</h2>
             <form id="cadastroAviso" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div class="container col-sm-4">
@@ -20,13 +20,22 @@
                             <textarea class="form-control" id="mensagemAviso" name="mensagemAviso" [(ngModel)]="cadastroAvisos.mensagem" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="moradorid">Id morador:</label>
-                            <textarea class="form-control" id="moradorid" name="moradorid" [(ngModel)]="cadastroAvisos.id" required></textarea>
+                            <label for="tipoAviso">Tipo de aviso:</label>
+                            <select class="form-control" id="tipoAviso" [(ngModel)]="cadastroAvisos.tipo" name="tipoAviso" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="geral">Geral</option>
+                                <option value="especifico">Específico</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar Aviso</button>
+                        <!-- Campo condicional para ID do Morador -->
+                        <div class="form-group" *ngIf="cadastroAvisos.tipo === 'especifico'">
+                            <label for="moradorId">ID do Morador:</label>
+                            <input type="text" class="form-control" id="moradorId" name="moradorId" [(ngModel)]="cadastroAvisos.moradorid">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                     <div class="col-sm-4 imagem">
-                        <img src="../../../assets/cadastroAvisos.jpg" width="100%" alt="">
+                        <img src="../../../assets/cadastroAvisos.jpg" width="100%" alt="Imagem de Cadastro de Avisos">
                     </div>
                 </div>
             </form>
@@ -37,17 +46,14 @@
 <!-- LISTAR, EDITAR E DELETAR AVISO -->
 <div class="row mt-5">
     <div class="container-fluid">
-        <h2 class="mb-4 titulo">Lista de Avisos</h2>
-        <div class="form-group">
-            <label for="search">Pesquisar:</label>
-            <input type="text" class="form-control" id="search" placeholder="Digite para pesquisar...">
-        </div>
+        <h2 class="mb-4 titulo">Lista de avisos</h2>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Título</th>
                     <th>Data</th>
                     <th>Mensagem</th>
+                    <th>ID do Morador</th>
                     <th>Opções</th>
                 </tr>
             </thead>
@@ -63,6 +69,10 @@
                         <td>
                             <textarea [(ngModel)]="aviso.mensagem" placeholder="Mensagem" name="mensagemEmEdicao{{aviso.id}}"></textarea>
                         </td>
+                        <!-- Campo condicional para ID do Morador em Edição -->
+                        <td>
+                            <input *ngIf="aviso.tipo === 'especifico'" [(ngModel)]="aviso.moradorid" placeholder="ID do Morador" name="moradorIdEmEdicao{{aviso.id}}">
+                        </td>
                         <td>
                             <button class="btn btn-success btn-sm" (click)="onSave(aviso)">Salvar</button>
                             <button class="btn btn-secondary btn-sm" (click)="onCancel()">Cancelar</button>
@@ -72,6 +82,7 @@
                         <td>{{ aviso.titulo }}</td>
                         <td>{{ aviso.data }}</td>
                         <td>{{ aviso.mensagem }}</td>
+                        <td>{{ aviso.tipo === 'especifico' ? aviso.moradorid : '' }}</td>
                         <td>
                             <button class="btn btn-warning btn-sm" (click)="onEdit(aviso)">Editar</button>
                             <button class="btn btn-danger btn-sm" (click)="onDelete(aviso)">Deletar</button>

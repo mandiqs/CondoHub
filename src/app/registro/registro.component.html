@@ -1,24 +1,37 @@
 <div class="container">
-    <div class="area-cadastro-background d-none d-md-block"></div>
-    <div class="area-form">
-      <form (ngSubmit)="registro()">
-        <h1 class="titulo">Cadastro</h1>
-        <h2 class="subtitulo">Crie sua conta</h2>
-  
-        <div class="mb-3">
-          <label for="nome" class="form-label">Nome:</label>
-          <input type="text" class="form-control" id="nome" [(ngModel)]="user.nome" name="nome" required>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">E-mail:</label>
-          <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
-        </div>
-        <div class="mb-3">
-          <label for="senha" class="form-label">Senha:</label>
-          <input type="password" class="form-control" id="senha" [(ngModel)]="user.senha" name="senha" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-        <button type="button" class="btn btn-secondary" (click)="voltarParaLogin()">Voltar</button>
-      </form>
-    </div>
+  <div class="area-cadastro-background d-none d-md-block"></div>
+  <div class="area-form">
+    <form (ngSubmit)="registro()">
+      <h1 class="titulo">Cadastro</h1>
+      <h2 class="subtitulo">Crie sua conta</h2>
+
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="nome" [(ngModel)]="user.nome" name="nome" required>
+      </div>
+      <div class="mb-3">
+        <label for="apartamento" class="form-label">Apartamento:</label>
+        <input type="text" class="form-control" id="apartamento" [(ngModel)]="user.apartamento" name="apartamento" required>
+      </div>
+      <div>
+        <label for="tipoUsuario">Tipo de Usuário:</label>
+        <select id="tipoUsuario" [(ngModel)]="user.tipoUsuario" name="tipoUsuario" required>
+          <option value="">Selecione</option>
+          <option value="sindico">Síndico</option>
+          <option value="morador">Morador</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha:</label>
+        <input type="password" class="form-control" id="senha" [(ngModel)]="user.senha" name="senha" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <button type="button" class="btn btn-secondary" (click)="voltarParaLogin()">Voltar</button>
+    </form>
   </div>
+</div>
+

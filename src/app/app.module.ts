@@ -22,6 +22,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { GerenciarMoradorComponent } from './pages/gerenciar-morador/gerenciar-morador.component';
 import { RegistroComponent } from './registro/registro.component';
 import { RouterModule } from '@angular/router';
+import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RouterModule } from '@angular/router';
     CadastroAvisosComponent,
     GerenciarMoradorComponent,
     RegistroComponent,
+    HomeMoradorComponent,
   ],
   imports: [
     BrowserModule,

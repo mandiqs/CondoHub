@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { DadosUsuario } from '../app/models/dados-usuario';
 
@@ -8,25 +9,41 @@ import { DadosUsuario } from '../app/models/dados-usuario';
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth, private firestore: Firestore, private router: Router) {}
 
   login(dadosUsuario: DadosUsuario): Promise<void> {
     return signInWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha)
-      .then(() => {
-        alert('Login feito com sucesso!');
+      .then(async (userCredential) => {
+        const userRef = doc(this.firestore, "users", userCredential.user.uid);
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists()) {
+          const userType = docSnap.data()['tipoUsuario'];
+          if (userType === 'síndico') {
+            this.router.navigate(['home']); 
+          } else {
+            this.router.navigate(['home-morador'])
+          }
+          alert('Login feito com sucesso!');
+        } else {
+          throw new Error("Erro ao logar");
+        }
       })
       .catch((error) => {
         console.log('Error:', error);
         alert('E-mail ou senha incorreto!');
-        throw error;
       });
-      }
+  }
 
   async registro(dadosUsuario: DadosUsuario): Promise<void> {
     try {
-      await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      const moradorCredential = await createUserWithEmailAndPassword(this.auth, dadosUsuario.email, dadosUsuario.senha);
+      await setDoc(doc(this.firestore, "morador", moradorCredential.user.uid), {
+        nome: dadosUsuario.nome,
+        email: dadosUsuario.email,
+        tipoUsuario: dadosUsuario.tipoUsuario, // Salvando o tipo de usuário no Firestore
+      });
+      this.router.navigate([dadosUsuario.tipoUsuario === 'síndico' ? 'home-sindico' : 'home-morador']);
       alert('Cadastro realizado com sucesso!');
-      this.router.navigate(['home']);
     } catch (error) {
       console.log('Error:', error);
       alert('Erro ao cadastrar usuário!');
@@ -36,7 +53,7 @@ export class AuthService {
 
   logout(): void {
     this.auth.signOut().then(() => {
-      sessionStorage.removeItem('user');
+      sessionStorage.removeItem('morador');
       this.router.navigate(['login']);
     });
   }
