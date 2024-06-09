@@ -10,10 +10,6 @@
           <input type="text" class="form-control" id="nome" [(ngModel)]="user.nome" name="nome" required>
         </div>
         <div class="mb-3">
-          <label for="apartamento" class="form-label">Apartamento:</label>
-          <input type="text" class="form-control" id="apartamento" [(ngModel)]="user.apartamento" name="apartamento" required>
-        </div>
-        <div class="mb-3">
           <label for="email" class="form-label">E-mail:</label>
           <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
         </div>
@@ -22,6 +18,7 @@
           <input type="password" class="form-control" id="senha" [(ngModel)]="user.senha" name="senha" required>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <button type="button" class="btn btn-secondary" (click)="voltarParaLogin()">Voltar</button>
       </form>
     </div>
   </div>

@@ -31,4 +31,8 @@ export class RegistroComponent {
         alert('Erro ao cadastrar!');
       });
   }
+
+  voltarParaLogin(): void {
+    this.router.navigate(['login']);
+  }
 }

@@ -7,21 +7,21 @@ body, html {
   .container {
     display: flex;
     height: 100%;
+    width: 100%;
   }
   
   .area-cadastro-background {
+    flex: 1;
     height: 100%;
-    width: 55%;
+    width: 50%;
     background-image: url('../../assets/registro.jpg');
-    background-size: 100% auto;
-    background-position: right bottom;
-    display: block;
-    float: left;
+    background-size: contain; /* Ajuste aqui */
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .area-form {
-    height: 100%;
-    width: 45%;
+    flex: 1;
     background: #fff;
     display: flex;
     align-items: center;
@@ -74,6 +74,7 @@ body, html {
   
   .btn {
     padding: 0.75em;
+    margin-top: 1em;
     background-color: #007bff;
     color: white;
     border: none;
@@ -84,4 +85,12 @@ body, html {
     background-color: #0056b3;
   }
   
+  .btn-secondary {
+    background-color: #6c757d;
+    margin-left: 0.5em;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
   
