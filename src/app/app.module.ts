@@ -24,6 +24,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { RouterModule } from '@angular/router';
 import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.component';
 import { MenuMoradorComponent } from './menu-morador/menu-morador.component';
+import { VerAvisoComponent } from './pages/ver-aviso/ver-aviso.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MenuMoradorComponent } from './menu-morador/menu-morador.component';
     RegistroComponent,
     HomeMoradorComponent,
     MenuMoradorComponent,
+    VerAvisoComponent,
   ],
   imports: [
     BrowserModule,

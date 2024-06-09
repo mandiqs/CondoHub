@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { HomeMoradorComponent } from './pages/home/home-morador/home-morador.component';
 import { MenuMoradorComponent } from './menu-morador/menu-morador.component';
+import { VerAvisoComponent } from './pages/ver-aviso/ver-aviso.component';
 
 
 const routes: Routes = [ 
@@ -23,8 +24,8 @@ const routes: Routes = [
   { path: 'registro', component: RegistroComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },
-  { path: 'menu-morador', component: MenuMoradorComponent }
-  
+  { path: 'menu-morador', component: MenuMoradorComponent },
+  { path: 'ver-aviso', component: VerAvisoComponent },
 ];
 
 @NgModule({
