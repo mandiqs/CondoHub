@@ -1,11 +1,10 @@
 <app-menu-morador></app-menu-morador>
 
 <div class="container">
-  <h1>Bem-vindo, {{ userName }}</h1>
-  <h2>Avisos</h2>
-  
-  <div *ngIf="avisos$ | async as avisos">
-    <div *ngFor="let aviso of avisos">
+  <h2>Bem-vindo, {{ userName }}</h2>
+  <h2>Avisos Específicos</h2>
+  <div *ngIf="avisosEspecificos$ | async as avisosEspecificos">
+    <div *ngFor="let aviso of avisosEspecificos">
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">{{ aviso.titulo }}</h5>
@@ -17,5 +16,15 @@
   </div>
 </div>
 
-
-  
+<h2>Avisos Gerais</h2>
+<div *ngIf="avisosGerais$ | async as avisosGerais">
+  <div *ngFor="let aviso of avisosGerais">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ aviso.titulo }}</h5>
+        <p class="card-text">{{ aviso.mensagem }}</p>
+        <p class="card-text"><small class="text-muted">{{ aviso.data }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
