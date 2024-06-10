@@ -21,10 +21,13 @@ export class HomeMoradorComponent implements OnInit {
     avisos: []
   };
 
+  userName: null | string = "";
+
   constructor(private firestore: Firestore) {}
 
   ngOnInit(): void {
     const moradorId = sessionStorage.getItem('user'); //ID do morador armazenado na sessão
+    this.userName = sessionStorage.getItem('user');
     if (moradorId) {
       this.loadMoradorData(moradorId);
       this.loadAvisos(moradorId);

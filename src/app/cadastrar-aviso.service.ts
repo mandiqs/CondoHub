@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, doc, deleteDoc, updateDoc, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Aviso } from '../app/models/aviso';
 
@@ -21,7 +21,6 @@ export class CadastrarAvisoService {
       const collectionRef = collection(this.firestore, 'avisos');
       return addDoc(collectionRef, cleanAviso).then(docRef => {
         console.log("Novo aviso adicionado com ID: ", docRef.id);
-        // Certifique-se de atualizar o ID do aviso após a criação para referência futura
         aviso.id = docRef.id;
       });
     }
@@ -50,6 +49,12 @@ export class CadastrarAvisoService {
     const cleanAviso = {...aviso}; // Cria uma cópia limpa do aviso para atualização
     const docRef = doc(this.firestore, 'avisos', aviso.id);
     return updateDoc(docRef, cleanAviso);
+  }
+
+  getRelevantAvisos(moradorId: string): Observable<Aviso[]> {
+    const avisosCollectionRef = collection(this.firestore, 'avisos');
+    const queryRef = query(avisosCollectionRef, where('moradorId', 'in', ['geral', moradorId]));
+    return collectionData(queryRef, { idField: 'id' }) as Observable<Aviso[]>;
   }
 }
 

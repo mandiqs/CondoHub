@@ -1,10 +1,10 @@
 <app-menu-morador></app-menu-morador>
 
 <div class="container">
-  <h1>Bem-vindo, {{ morador.nome }}</h1>
+  <h1>Bem-vindo, {{ userName }}</h1>
   <h2>Avisos</h2>
   
-  <div *ngIf="avisos$ | async as avisos; else noAvisos">
+  <div *ngIf="avisos$ | async as avisos">
     <div *ngFor="let aviso of avisos">
       <div class="card mb-3">
         <div class="card-body">
@@ -15,10 +15,6 @@
       </div>
     </div>
   </div>
-  
-  <ng-template #noAvisos>
-    <p>Nenhum aviso encontrado.</p>
-  </ng-template>
 </div>
 
 
