@@ -1,0 +1,6 @@
+Para executar o projeto rode:
+npm install
+
+
+depois exclua a pasta:
+node modules
