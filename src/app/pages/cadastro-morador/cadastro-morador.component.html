@@ -55,7 +55,6 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Nome</th>
                     <th>Andar</th>
                     <th>Número do Apartamento</th>
@@ -69,9 +68,6 @@
             <tbody>
                 <tr *ngFor="let morador of cadastroMoradores">
                     <ng-container *ngIf="moradorEmEdicao?.id === morador.id; else readMode">
-                        <td>
-                            <input [(ngModel)]="morador.id" placeholder="Id" name="id" disabled>
-                        </td>
                         <td>
                             <input [(ngModel)]="morador.nome" placeholder="Nome" name="nomeEmEdicao">
                         </td>
@@ -99,7 +95,6 @@
                         </td>
                     </ng-container>
                     <ng-template #readMode>
-                        <td>{{ morador.id }}</td>
                         <td>{{ morador.nome }}</td>
                         <td>{{ morador.andar }}</td>
                         <td>{{ morador.numeroApto }}</td>

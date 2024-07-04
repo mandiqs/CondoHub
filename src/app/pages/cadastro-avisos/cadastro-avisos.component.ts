@@ -90,6 +90,7 @@ export class CadastroAvisosComponent implements OnInit {
       .then(() => {
         this.loadData();
         alert("Aviso atualizado com sucesso!");
+        this.avisoEmEdicao = undefined; // Adicionado para redefinir o modo de edição
       })
       .catch(error => {
         console.error('Erro ao atualizar dados:', error);

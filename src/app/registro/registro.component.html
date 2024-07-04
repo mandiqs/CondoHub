@@ -13,9 +13,9 @@
         <label for="apartamento" class="form-label">Apartamento:</label>
         <input type="text" class="form-control" id="apartamento" [(ngModel)]="user.apartamento" name="apartamento" required>
       </div>
-      <div>
-        <label for="tipoUsuario">Tipo de Usuário:</label>
-        <select id="tipoUsuario" [(ngModel)]="user.tipoUsuario" name="tipoUsuario" required>
+      <div class="mb-3">
+        <label for="tipoUsuario" class="form-label">Tipo de Usuário:</label>
+        <select id="tipoUsuario" class="form-control" [(ngModel)]="user.tipoUsuario" name="tipoUsuario" required>
           <option value="">Selecione</option>
           <option value="sindico">Síndico</option>
           <option value="morador">Morador</option>
@@ -34,4 +34,5 @@
     </form>
   </div>
 </div>
+
 
