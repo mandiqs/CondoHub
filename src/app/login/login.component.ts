@@ -32,5 +32,15 @@ export class LoginComponent {
         alert('E-mail ou senha incorreto!');
       });
   }
+  resetForm(): void {
+    this.user = {
+      email: '',
+      senha: '',
+      nome: '',
+      apartamento: '',
+      tipoUsuario: '',
+      id: '',
+    };
+  }
 }
 

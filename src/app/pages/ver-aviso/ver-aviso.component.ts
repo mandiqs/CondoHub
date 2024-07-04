@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Aviso } from '../../models/aviso';
 
+
 @Component({
   selector: 'app-ver-aviso',
   templateUrl: './ver-aviso.component.html',
@@ -33,4 +34,3 @@ export class VerAvisoComponent implements OnInit {
     );
   }
 }
-
